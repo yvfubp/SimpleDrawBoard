@@ -11,6 +11,11 @@ protected: // 仅从序列化创建
 	CSimpleDrawBoardView() noexcept;
 	DECLARE_DYNCREATE(CSimpleDrawBoardView)
 
+protected:// 添加以下成员
+	// 绘图交互状态
+	bool m_bDrawing;      // 鼠标是否按下
+	CPoint m_ptStart;     // 起点
+	CPoint m_ptEnd;       // 当前终点（鼠标移动时实时更新）
 // 特性
 public:
 	CSimpleDrawBoardDoc* GetDocument() const;
