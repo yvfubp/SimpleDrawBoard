@@ -57,6 +57,15 @@
     <ClInclude Include="CGdiObjectWrapper.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Shapes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeFactory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SimpleDrawBoard.cpp">

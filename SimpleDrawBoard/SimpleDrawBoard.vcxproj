@@ -185,6 +185,7 @@
   <ItemGroup>
     <ClInclude Include="CGdiObjectWrapper.h" />
     <ClInclude Include="ClassView.h" />
+    <ClInclude Include="Commands.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MainFrm.h" />
@@ -192,6 +193,8 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="PropertiesWnd.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="ShapeFactory.h" />
+    <ClInclude Include="Shapes.h" />
     <ClInclude Include="SimpleDrawBoard.h" />
     <ClInclude Include="SimpleDrawBoardDoc.h" />
     <ClInclude Include="SimpleDrawBoardView.h" />

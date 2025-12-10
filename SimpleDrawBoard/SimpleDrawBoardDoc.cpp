@@ -23,6 +23,10 @@
 IMPLEMENT_DYNCREATE(CSimpleDrawBoardDoc, CDocument)
 
 BEGIN_MESSAGE_MAP(CSimpleDrawBoardDoc, CDocument)
+	ON_COMMAND(ID_TOOL_LINE, &CSimpleDrawBoardDoc::OnToolLine)
+	ON_UPDATE_COMMAND_UI(ID_TOOL_LINE, &CSimpleDrawBoardDoc::OnUpdateToolLine)
+	ON_COMMAND(ID_TOOL_RECT, &CSimpleDrawBoardDoc::OnToolRect)
+	ON_UPDATE_COMMAND_UI(ID_TOOL_RECT, &CSimpleDrawBoardDoc::OnUpdateToolRect)
 END_MESSAGE_MAP()
 
 
@@ -136,3 +140,28 @@ void CSimpleDrawBoardDoc::Dump(CDumpContext& dc) const
 
 
 // CSimpleDrawBoardDoc 命令
+
+void CSimpleDrawBoardDoc::OnToolLine()
+{
+	// TODO: 在此添加命令处理程序代码
+	m_currentShapeType = ShapeType::Line; // 切换状态
+}
+
+void CSimpleDrawBoardDoc::OnUpdateToolLine(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	// 如果当前是 Line，就设为 SetCheck(TRUE) 打钩
+	pCmdUI->SetCheck(m_currentShapeType == ShapeType::Line);
+}
+
+void CSimpleDrawBoardDoc::OnToolRect()
+{
+	// TODO: 在此添加命令处理程序代码
+	m_currentShapeType = ShapeType::Rectangle;
+}
+
+void CSimpleDrawBoardDoc::OnUpdateToolRect(CCmdUI* pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->SetCheck(m_currentShapeType == ShapeType::Rectangle);
+}
