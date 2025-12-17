@@ -173,7 +173,8 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	lstBasicCommands.AddTail(ID_SORTING_GROUPBYTYPE);
 
 	CMFCToolBar::SetBasicCommands(lstBasicCommands);
-
+	// 强制显示所有菜单项，禁止隐藏“不常用”命令
+	CMFCMenuBar::SetRecentlyUsedMenus(FALSE);
 	return 0;
 }
 

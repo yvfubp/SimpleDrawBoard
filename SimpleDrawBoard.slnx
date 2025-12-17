@@ -3,5 +3,6 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Project Path="DrawBoardTest/DrawBoardTest.vcxproj" Id="c097553d-7779-4684-a7a0-e5e11eb46b04" />
   <Project Path="SimpleDrawBoard/SimpleDrawBoard.vcxproj" />
 </Solution>

@@ -63,6 +63,9 @@ public:
 
         UpdateAllViews(NULL);
     }
+    // 【新增】当前颜色和线宽状态
+    COLORREF m_currentColor = RGB(0, 0, 0);
+    int m_currentWidth = 1;
 // 特性
 public:
 
@@ -101,4 +104,17 @@ public:
     afx_msg void OnUpdateToolLine(CCmdUI* pCmdUI);
     afx_msg void OnToolRect();
     afx_msg void OnUpdateToolRect(CCmdUI* pCmdUI);
+    afx_msg void OnToolEllipse();
+    afx_msg void OnUpdateToolEllipse(CCmdUI* pCmdUI);
+    afx_msg void OnToolColor();
+    afx_msg void OnWidth1();
+    afx_msg void OnUpdateWidth1(CCmdUI* pCmdUI);
+    afx_msg void OnWidth2();
+    afx_msg void OnUpdateWidth2(CCmdUI* pCmdUI);
+    afx_msg void OnWidth4();
+    afx_msg void OnUpdateWidth4(CCmdUI* pCmdUI);
+    afx_msg void OnWidth8();
+    afx_msg void OnUpdateWidth8(CCmdUI* pCmdUI);
+    afx_msg void OnToolFreehand();
+    afx_msg void OnUpdateToolFreehand(CCmdUI* pCmdUI);
 };

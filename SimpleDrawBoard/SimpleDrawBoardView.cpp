@@ -1,5 +1,4 @@
-﻿
-// SimpleDrawBoardView.cpp: CSimpleDrawBoardView 类的实现
+﻿// SimpleDrawBoardView.cpp: CSimpleDrawBoardView 类的实现
 //
 
 #include "pch.h"
@@ -36,6 +35,7 @@ BEGIN_MESSAGE_MAP(CSimpleDrawBoardView, CView)
 	ON_WM_LBUTTONUP()
 	ON_COMMAND(ID_EDIT_UNDO, &CSimpleDrawBoardView::OnEditUndo)
 	ON_COMMAND(ID_EDIT_REDO, &CSimpleDrawBoardView::OnEditRedo)
+	//	ON_UPDATE_COMMAND_UI(ID_EDIT_REDO, &CSimpleDrawBoardView::OnUpdateEditRedo)
 END_MESSAGE_MAP()
 
 // CSimpleDrawBoardView 构造/析构
@@ -47,7 +47,6 @@ CSimpleDrawBoardView::CSimpleDrawBoardView() noexcept
 	m_bDrawing = false;
 	m_ptStart = CPoint(0, 0);
 	m_ptEnd = CPoint(0, 0);
-
 }
 
 CSimpleDrawBoardView::~CSimpleDrawBoardView()
@@ -69,7 +68,21 @@ void CSimpleDrawBoardView::OnDraw(CDC* pDC)
 	CSimpleDrawBoardDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 	if (!pDoc) return;
-
+	// ==================================================
+	// 分支 A: 打印模式 (直接绘制到打印机 DC)
+	// ==================================================
+	if (pDC->IsPrinting())
+	{
+		// 打印机不需要双缓冲 (而且打印机分辨率很高，创建兼容位图会消耗巨大内存)
+		// 直接遍历列表绘制即可
+		for (const auto& shape : pDoc->m_shapeList) {
+			shape->Draw(pDC);
+		}
+		return; // 打印完成，直接返回
+	}
+	// ==================================================
+	// 分支 B: 屏幕模式 (使用双缓冲防止闪烁)
+	// ==================================================
 	// --- 双缓冲技术 (Double Buffering) 开始 ---
 	// 目的：防止绘图闪烁，对应性能要求 NF-02
 
@@ -98,28 +111,29 @@ void CSimpleDrawBoardView::OnDraw(CDC* pDC)
 	// ---------------------------------------------
 	// 这里使用 RAII 画笔/画刷，防止资源泄漏
 	// 1. 先创建包装器
-	CPenWrapper pen;
-	// 2. 再创建画笔资源
-	pen.CreatePen(PS_SOLID, 1, RGB(0, 0, 0));
-	CPen* pOldPen = memDC.SelectObject(pen.Get());
+	//CPenWrapper pen;
+	//// 2. 再创建画笔资源
+	//pen.CreatePen(PS_SOLID, 1, RGB(0, 0, 0));
+	//CPen* pOldPen = memDC.SelectObject(pen.Get());
 
-	for (const auto& shape : pDoc->m_shapeList) {
+	for (const auto& shape : pDoc->m_shapeList)
+	{
 		shape->Draw(&memDC); // 多态调用：直线画直线，矩形画矩形
 	}
 
-	memDC.SelectObject(pOldPen);
+	//memDC.SelectObject(pOldPen);
 	// ---------------------------------------------
 	// B. 绘制当前正在拖拽的临时线条 (橡皮筋效果)
-	 if (m_bDrawing && m_pTempShape)
+	if (m_bDrawing && m_pTempShape)
 	{
 		// 同样需要设置画笔
-		CPenWrapper pen;
+		/*CPenWrapper pen;
 		pen.CreatePen(PS_SOLID, 1, RGB(0, 0, 0));
-		CPen* pOldPen = memDC.SelectObject(pen.Get());
+		CPen* pOldPen = memDC.SelectObject(pen.Get());*/
 
 		m_pTempShape->Draw(&memDC); // 画临时的
 
-		memDC.SelectObject(pOldPen);
+		//memDC.SelectObject(pOldPen);
 	}
 	//if (m_bDrawing)
 	//{
@@ -150,7 +164,6 @@ void CSimpleDrawBoardView::OnDraw(CDC* pDC)
 
 	// 6. 清理资源 (CBitmap 等对象析构自动释放，但选入对象需还原)
 	memDC.SelectObject(pOldBitmap);
-
 }
 
 
@@ -210,7 +223,7 @@ void CSimpleDrawBoardView::Dump(CDumpContext& dc) const
 CSimpleDrawBoardDoc* CSimpleDrawBoardView::GetDocument() const // 非调试版本是内联的
 {
 	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CSimpleDrawBoardDoc)));
-	return (CSimpleDrawBoardDoc*)m_pDocument;
+	return static_cast<CSimpleDrawBoardDoc*>(m_pDocument);
 }
 #endif //_DEBUG
 
@@ -226,10 +239,10 @@ BOOL CSimpleDrawBoardView::OnEraseBkgnd(CDC* pDC)
 void CSimpleDrawBoardView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
-	m_bDrawing = true;     // 标记开始绘制
-	m_ptStart = point;     // 记录起点
-	m_ptEnd = point;       // 初始终点等于起点
-	SetCapture();          // 【关键】捕获鼠标，防止拖出窗口外丢失状态
+	m_bDrawing = true; // 标记开始绘制
+	m_ptStart = point; // 记录起点
+	m_ptEnd = point; // 初始终点等于起点
+	SetCapture(); // 【关键】捕获鼠标，防止拖出窗口外丢失状态
 	// 1. 获取文档
 	CSimpleDrawBoardDoc* pDoc = GetDocument();
 	//ASSERT_VALID(pDoc);
@@ -239,9 +252,15 @@ void CSimpleDrawBoardView::OnLButtonDown(UINT nFlags, CPoint point)
 	//auto newShape = ShapeFactory::CreateShape(pDoc->m_currentShapeType);
 
 	// 3. 设置初始坐标
-	if (m_pTempShape) {
+	if (m_pTempShape)
+	{
 		m_pTempShape->SetStart(point);
-		m_pTempShape->SetEnd(point);
+		// m_pTempShape->SetEnd(point);
+		// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+		// 【新增】注入属性：将文档的当前状态传给新图形
+		m_pTempShape->SetColor(pDoc->m_currentColor);
+		m_pTempShape->SetWidth(pDoc->m_currentWidth);
+		// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 	}
 	CView::OnLButtonDown(nFlags, point);
 }
@@ -251,10 +270,16 @@ void CSimpleDrawBoardView::OnMouseMove(UINT nFlags, CPoint point)
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
 	if (m_bDrawing)
 	{
-		m_ptEnd = point;   // 更新终点
+		m_ptEnd = point; // 更新终点
 		// 更新临时对象
-		if (m_pTempShape) {
-			m_pTempShape->SetEnd(point);
+		if (m_pTempShape)
+		{
+			// ❌ 删除旧代码: m_pTempShape->SetEnd(point);
+
+			// ✅ 使用多态接口: 
+			// 如果是直线，它会自动更新终点; 
+			// 如果是曲线，它会自动 push_back 新点。
+			m_pTempShape->OnDrag(point);
 		}
 		Invalidate(FALSE); // 【关键】触发 OnDraw 重绘。FALSE 表示不擦除背景(配合步骤2.5)
 	}
@@ -268,9 +293,12 @@ void CSimpleDrawBoardView::OnLButtonUp(UINT nFlags, CPoint point)
 	{
 		m_bDrawing = false;
 		m_ptEnd = point;
-		ReleaseCapture();  // 释放鼠标捕获
+		ReleaseCapture(); // 释放鼠标捕获
 		// 提交命令
-		if (m_pTempShape) {
+		if (m_pTempShape)
+		{
+			// 再次更新一下终点，确保准确
+			// m_pTempShape->SetEnd(point);
 			CSimpleDrawBoardDoc* pDoc = GetDocument();
 
 			// 创建一个命令对象
@@ -298,4 +326,6 @@ void CSimpleDrawBoardView::OnEditUndo()
 void CSimpleDrawBoardView::OnEditRedo()
 {
 	// TODO: 在此添加命令处理程序代码
+	// 调用 Doc 里的 OnRedo 方法 (你之前写好的)
+	GetDocument()->OnRedo();
 }

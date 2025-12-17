@@ -90,13 +90,32 @@
 #define ID_32774                        32774
 #define ID_TOOL_LINE                    32775
 #define ID_TOOL_RECT                    32776
+#define ID_32777                        32777
+#define ID_TOOL_ELLIPSE                 32778
+#define ID_32779                        32779
+#define id_edit                         32780
+#define ID_32781                        32781
+#define ID_TOOL_COLOR                   32790
+#define ID_WIDTH_1                      32791
+#define ID_32792                        32792
+#define ID_32793                        32793
+#define ID_32794                        32794
+#define ID_WIDTH_2                      32795
+#define ID_WIDTH_4                      32796
+#define ID_WIDTH_8                      32797
+#define ID_32798                        32798
+#define ID_32799                        32799
+#define ID_32800                        32800
+#define ID_32801                        32801
+#define ID_32802                        32802
+#define ID_TOOL_FREEHAND                32803
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        310
-#define _APS_NEXT_COMMAND_VALUE         32777
+#define _APS_NEXT_COMMAND_VALUE         32804
 #define _APS_NEXT_CONTROL_VALUE         1000
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
