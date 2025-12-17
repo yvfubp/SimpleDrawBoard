@@ -188,5 +188,6 @@
     <None Include="res\SimpleDrawBoard.rc2">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

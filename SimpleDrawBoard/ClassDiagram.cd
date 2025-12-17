@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CClassViewMenuButton" Collapsed="true">
+    <Position X="15.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ClassView.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAboutDlg" Collapsed="true">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SimpleDrawBoard.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CGdiObjectWrapper&lt;T&gt;" Collapsed="true">
+    <Position X="12" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgBAAAgAAgAAAAAAAAAEIAAgABAAAAA=</HashCode>
+      <FileName>CGdiObjectWrapper.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CClassToolBar" Collapsed="true">
+    <Position X="11.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>ClassView.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CClassView" Collapsed="true">
+    <Position X="13.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACACABAgAEAAAwAhAAMgAAAAiAEgAEAAAEBgEAAACA=</HashCode>
+      <FileName>ClassView.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IDrawCommand" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAQAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AddShapeCommand" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAABgAAAAAAAAAQAAAAAAAAAAAAAEAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Commands.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CFileViewToolBar" Collapsed="true">
+    <Position X="10" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>FileView.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CFileView" Collapsed="true">
+    <Position X="17.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACgCAAAiAEAACABAAAAkAAAACAEAAFAgQABAABIAAA=</HashCode>
+      <FileName>FileView.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMainFrame" Collapsed="true">
+    <Position X="14.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAgCAAAAAAAAASAGAACiAAEoCEAAgAgAABQAAAAAhA=</HashCode>
+      <FileName>MainFrm.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COutputList" Collapsed="true">
+    <Position X="16" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAABAAAAgAAAAAAAAAAAIAABAAAIAAA=</HashCode>
+      <FileName>OutputWnd.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COutputWnd" Collapsed="true">
+    <Position X="17.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QBIAACAAAAECAAAAAAAAAAAAACACAAAABAABIAAECAA=</HashCode>
+      <FileName>OutputWnd.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CPropertiesToolBar" Collapsed="true">
+    <Position X="10" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>PropertiesWnd.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CPropertiesWnd" Collapsed="true">
+    <Position X="12" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAFkAAQCAAAQAmAAAACAAAAUAgJAACBQAAAA=</HashCode>
+      <FileName>PropertiesWnd.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShapeFactory" Collapsed="true">
+    <Position X="11.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ShapeFactory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IShape" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAABMAAAAADAAAAEAAAoAAAgAgAQ=</HashCode>
+      <FileName>Shapes.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CLine" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Shapes.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CRectangle" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Shapes.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CEllipse" Collapsed="true">
+    <Position X="7.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Shapes.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CFreehand" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAABAAAAAACAAAAkAAAIAAAAAAAA=</HashCode>
+      <FileName>Shapes.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSimpleDrawBoardApp" Collapsed="true">
+    <Position X="13.75" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAABQAAAAAQCAAARAAgCAAA=</HashCode>
+      <FileName>SimpleDrawBoard.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSimpleDrawBoardDoc" Collapsed="true">
+    <Position X="16" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>CAAISCAAQBAwAACACAMBgEBkAyggJAAA0AAAQAACAEA=</HashCode>
+      <FileName>SimpleDrawBoardDoc.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSimpleDrawBoardView" Collapsed="true">
+    <Position X="18.25" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAFAAAAACARIgABAgBAAAAAAAggJBIAYAQA=</HashCode>
+      <FileName>SimpleDrawBoardView.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CViewTree" Collapsed="true">
+    <Position X="10" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAgQAAAAA=</HashCode>
+      <FileName>ViewTree.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="ShapeType" Collapsed="true">
+    <Position X="10" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAAAgAAAAAAAAAACBAAA=</HashCode>
+      <FileName>Shapes.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
