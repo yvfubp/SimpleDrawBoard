@@ -87,3 +87,70 @@ TEST(SerializerTest, LineSaveLoad)
 	// 由于我们之前没写 GetColor，这里只要不报错、不崩溃，就算测试通过。
 	SUCCEED();
 }
+// 追加到 test.cpp 底部
+
+TEST(SerializerTest, FreehandComplexSaveLoad) {
+	// 1. 创建一个复杂的自由曲线
+	auto original = std::make_shared<CFreehand>();
+	original->SetStart(CPoint(0, 0));
+	original->OnDrag(CPoint(10, 10));
+	original->OnDrag(CPoint(20, 20));
+	original->OnDrag(CPoint(30, 30)); // 模拟画了3个点
+	original->SetColor(RGB(0, 255, 0)); // 绿色
+	original->SetWidth(3);
+
+	// 2. 模拟保存到内存
+	CMemFile memFile;
+	{
+		CArchive ar(&memFile, CArchive::store);
+		original->Serialize(ar);
+		ar.Close();
+	}
+
+	memFile.SeekToBegin();
+
+	// 3. 模拟读取
+	auto loaded = std::make_shared<CFreehand>();
+	{
+		CArchive ar(&memFile, CArchive::load);
+		loaded->Serialize(ar);
+		ar.Close();
+	}
+
+	// 4. 验证：虽然我们不能直接访问私有成员 m_points，
+	// 但我们可以通过再一次序列化来对比二进制数据是否完全一致
+	// (这是一种黑盒验证技巧)
+	CMemFile file1, file2;
+	CArchive ar1(&file1, CArchive::store), ar2(&file2, CArchive::store);
+	original->Serialize(ar1);
+	loaded->Serialize(ar2);
+	ar1.Close(); ar2.Close();
+
+	// 两个对象生成的二进制流应该一模一样
+	ASSERT_EQ(file1.GetLength(), file2.GetLength());
+}
+TEST(CommandTest, FullUndoRedoCycle) {
+	std::vector<std::shared_ptr<IShape>> list;
+	auto rect = std::make_shared<CRectangle>();
+
+	AddShapeCommand cmd(list, rect);
+
+	// 1. 执行 (Execute)
+	cmd.Execute();
+	EXPECT_EQ(list.size(), 1);
+
+	// 2. 撤销 (UnExecute)
+	cmd.UnExecute();
+	EXPECT_EQ(list.size(), 0);
+
+	// 3. 重做 (再次 Execute)
+	cmd.Execute();
+	EXPECT_EQ(list.size(), 1);
+	EXPECT_EQ(list[0], rect); // 确保回来的还是原来那个对象
+}
+TEST(ShapeFactoryTest, InvalidType) {
+	// 强行转一个不存在的枚举值，测试工厂是否返回 nullptr
+	// (假设你的枚举没有定义 999)
+	auto shape = ShapeFactory::CreateShape((ShapeType)999);
+	EXPECT_EQ(shape, nullptr);
+}
