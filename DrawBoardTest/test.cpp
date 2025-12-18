@@ -87,9 +87,11 @@ TEST(SerializerTest, LineSaveLoad)
 	// 由于我们之前没写 GetColor，这里只要不报错、不崩溃，就算测试通过。
 	SUCCEED();
 }
+
 // 追加到 test.cpp 底部
 
-TEST(SerializerTest, FreehandComplexSaveLoad) {
+TEST(SerializerTest, FreehandComplexSaveLoad)
+{
 	// 1. 创建一个复杂的自由曲线
 	auto original = std::make_shared<CFreehand>();
 	original->SetStart(CPoint(0, 0));
@@ -124,12 +126,15 @@ TEST(SerializerTest, FreehandComplexSaveLoad) {
 	CArchive ar1(&file1, CArchive::store), ar2(&file2, CArchive::store);
 	original->Serialize(ar1);
 	loaded->Serialize(ar2);
-	ar1.Close(); ar2.Close();
+	ar1.Close();
+	ar2.Close();
 
 	// 两个对象生成的二进制流应该一模一样
 	ASSERT_EQ(file1.GetLength(), file2.GetLength());
 }
-TEST(CommandTest, FullUndoRedoCycle) {
+
+TEST(CommandTest, FullUndoRedoCycle)
+{
 	std::vector<std::shared_ptr<IShape>> list;
 	auto rect = std::make_shared<CRectangle>();
 
@@ -148,9 +153,11 @@ TEST(CommandTest, FullUndoRedoCycle) {
 	EXPECT_EQ(list.size(), 1);
 	EXPECT_EQ(list[0], rect); // 确保回来的还是原来那个对象
 }
-TEST(ShapeFactoryTest, InvalidType) {
+
+TEST(ShapeFactoryTest, InvalidType)
+{
 	// 强行转一个不存在的枚举值，测试工厂是否返回 nullptr
 	// (假设你的枚举没有定义 999)
-	auto shape = ShapeFactory::CreateShape((ShapeType)999);
+	auto shape = ShapeFactory::CreateShape(static_cast<ShapeType>(999));
 	EXPECT_EQ(shape, nullptr);
 }
